@@ -119,7 +119,7 @@ const searchEdu = async (req,res) => {
         res.json(result)
     }catch(err){
         console.error("O'quvmarkazlarni qidirishda xatolik", err);
-        res.status(500).json({message: "Serverda xatolik: o'quvmarkazlarni qidirish muvaffaqiyatsz!"})
+        res.status(500).json({message: "Serverda xatolik: o'quvmarkazlarni qidirish muvaffaqiyatsiz!"})
     }
 } 
 

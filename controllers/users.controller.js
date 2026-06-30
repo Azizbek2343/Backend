@@ -1,4 +1,6 @@
 const { User } = require("../model/userSchema");
+const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
 
 // --------------------Register User---------------------
 const postRegister = async (req , res ) => {
@@ -24,15 +26,16 @@ const postRegister = async (req , res ) => {
                 message: "Bu nom bilan ro'yxatdan o'tgan foydalanuvchi mavjud"
             });
         } else {
+            const hashedPassword = await bcrypt.hash(password, 10)
             const newUser = new User({
                 username,
-                password, 
                 firstname,
                 lastname,
                 birthday,
                 jinsi,
                 address,
                 phone,
+                password: hashedPassword, 
             });
             
             await newUser.save();
@@ -169,8 +172,44 @@ const deleteUser = async (req, res) => {
     }
 };
 
+// --------------------Login---------------------
+const postLogin = async (req, res) => {
+    try{
+        const { username, password } = req.body;
+
+        const user = await User.findOne({username});
+        console.log(user);
+        if (!user) {
+            return res.status(401).json({
+                success: false,
+                message: "Username is invalid",
+            });
+        }
+
+        const passwordMatch = await bcrypt.compare(password, user.password);
+        if (!passwordMatch) {
+            return res.status(401).json({
+                success: false,
+                message:"Username or password is invalid!",
+            });
+        }
+        const token = jwt.sign({ username: user.username }, "secret");
+        return res.json({
+            message: "Token",
+            token: token,
+        });
+    } catch (error) {
+        console.log("Error", error);
+        return res.status(500).json({
+            success: false,
+            message: "Server error: An error occured during the login process."
+        });
+    }
+};
+
 module.exports = {
     postRegister,
+    postLogin,
     getUsers ,
     getUserById,
     updateUser,
