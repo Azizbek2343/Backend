@@ -88,7 +88,10 @@ app.listen(PORT, () => {
 const {users} = require("./routes/userRoute");
 const {eduRoute} = require("./routes/eduRoute"); 
 const {houseRoute} = require("./routes/houseRoute"); 
+const {carRoute} = require("./routes/carRoute"); 
+
 
 app.use("/user", users);
 app.use("/edu", eduRoute);
 app.use("/house", houseRoute); 
+app.use("/car", carRoute); 
