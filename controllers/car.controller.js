@@ -1,16 +1,16 @@
-const { Edu } = require("../model/carSchema"); 
+const { Car } = require("../model/carSchema"); 
 
 const postCar = async (req, res) => {
     try {
         const { 
-            branch, 
+            brand, 
             model, 
             plate_number, 
             color, 
             passenger_capacity
         } = req.body; 
         
-        const existingCar = await Car.findOne({ plate_number });
+        const existingCar = await Car.findOne({ plate_number, brand });
         if (existingCar) {
             return res.status(400).json({ 
                 success: false, 
