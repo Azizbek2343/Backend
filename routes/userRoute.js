@@ -1,7 +1,7 @@
 const {Router} = require("express")
 const users = Router()
 
-const { postRegister, getUsers, getUserById, updateUser, searchUser, deleteUser, postLogin} = require("../controllers/users.controller")
+const { postRegister, getUsers, getUserById, updateUser, searchUser, deleteUser, postLogin } = require("../controllers/users.controller")
 
 const validationSchema = (schema) => (req, res, next) => {
     const validationResult = schema.validate(req.body);
