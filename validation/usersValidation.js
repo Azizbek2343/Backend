@@ -27,9 +27,13 @@ const updateUserValidationSchema = Joi.object({
     .pattern(
         /^(?=.*[A-Za-z])(?=.*\d)(?=.*[!@#$%^&*(_+{}\[\]:;<>,.?~\\/-]).{8,}$/
     ),
+    firstname: Joi.string().trim().optional(),
     lastname: Joi.string().optional(),
     address: Joi.string().optional(),
     phone: Joi.string().pattern(/^\+998\d{9}$/).optional(),
+    car_id: Joi.string().optional(),
+    edu_id: Joi.string().optional(),
+    house_id: Joi.string().optional(),
 });
 
 module.exports = {

@@ -10,7 +10,9 @@ const eduCenterValidationSchema = Joi.object({
 
 const updateEduValidationSchema = Joi.object({
     city: Joi.string().trim().optional(),
+    street: Joi.string().trim().optional(),
     center_name: Joi.string().trim().optional(),
+    branch: Joi.string().trim().optional(),
     rating: Joi.string().optional().min(1).max(5),
 })
 

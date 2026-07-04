@@ -14,6 +14,9 @@ const postRegister = async (req , res ) => {
             jinsi,
             address,
             phone,
+            car_id,
+            house_id,
+            edu_id,
         } = req.body;
         
         const existingUser = await User.findOne({username});
@@ -36,6 +39,9 @@ const postRegister = async (req , res ) => {
                 address,
                 phone,
                 password: hashedPassword, 
+                car_id,
+                edu_id,
+                house_id,
             });
             
             await newUser.save();
@@ -77,7 +83,7 @@ const getUserById = async (req, res) => {
     try {
         const userId = req.params.id
 
-        const user = await User.findById(userId)
+        const user = await User.findById(userId).populate('car_id').populate('edu_id').populate('house_id');
         if(!user) {
             return res.status(404).json({message: "User not found"})
         }
