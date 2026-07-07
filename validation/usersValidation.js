@@ -15,7 +15,9 @@ const registerValidationSchema = Joi.object({
     jinsi: Joi.string().optional(),
     address: Joi.string(),
     phone: Joi.string().pattern(/^\+998\d{9}$/),
-    // car_id: Joi.string().optional()
+    car_id: Joi.string().optional(),
+    edu_id: Joi.string().optional(),
+    house_id: Joi.string().optional(),
 });
 
 const updateUserValidationSchema = Joi.object({

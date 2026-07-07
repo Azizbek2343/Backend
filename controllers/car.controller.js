@@ -3,27 +3,43 @@ const { Car } = require("../model/carSchema");
 const postCar = async (req, res) => {
     try {
         const { 
-            brand, 
+            title, 
             model, 
-            plate_number, 
+            description, 
             color, 
+            horsePower, 
+            carType, 
+            charging, 
+            weight, 
+            gasoline, 
+            yearMachine, 
+            price, 
+            plate_number,
             passenger_capacity
         } = req.body; 
         
-        const existingCar = await Car.findOne({ plate_number, brand });
+        const existingCar = await Car.findOne({ title, model });
         if (existingCar) {
             return res.status(400).json({ 
                 success: false, 
-                message: "Bu davlat raqamiga ega avtomobil allaqachon mavjud!" 
+                message: "Bu nom va modeldagi avtomobil allaqachon mavjud!" 
             });
         }
         
         const newCar = new Car({ 
-            brand, 
+            title, 
             model, 
-            plate_number, 
+            description, 
             color, 
-            passenger_capacity 
+            horsePower, 
+            carType, 
+            charging, 
+            weight, 
+            gasoline, 
+            yearMachine, 
+            price,
+            plate_number,
+            passenger_capacity
         });
 
         await newCar.save();
@@ -82,10 +98,10 @@ const searchCar = async (req, res) => {
 
         const result = await Car.find({
             $or: [
-                { brand: { $regex: query, $options: "i" } },
+                { title: { $regex: query, $options: "i" } },
                 { model: { $regex: query, $options: "i" } },
-                { plate_number: { $regex: query, $options: "i" } },
-                { color: { $regex: query, $options: "i" } }
+                { color: { $regex: query, $options: "i" } },
+                { carType: { $regex: query, $options: "i" } }
             ],
         });
 
