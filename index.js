@@ -95,3 +95,27 @@ app.use("/user", users);
 app.use("/edu", eduRoute);
 app.use("/house", houseRoute); 
 app.use("/car", carRoute); 
+
+const swaggerJsdoc = require("swagger-jsdoc");
+const swaggerUi = require("swagger-ui-express");
+const { version } = require("joi");
+
+const swaggerOptions = {
+    swaggerDefinition: {
+        openapi: "3.0.0",
+        info: {
+            title: "Express API with Swagger",
+            version: "1.0.0",
+            description: "API documents using Swagger",
+        },
+        servers: [
+            {
+                url: "http://localhost:3000",
+            },
+        ],
+    },
+    apis: ["./routes/*.js"],
+};
+
+const swaggerDocs = swaggerJsdoc(swaggerOptions);
+app.use("/api-dosc", swaggerUi.serve, swaggerUi.setup(swaggerDocs));
