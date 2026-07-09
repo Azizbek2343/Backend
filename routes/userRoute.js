@@ -1,4 +1,4 @@
-const {Router} = require("express")
+const { Router } = require("express")
 const users = Router()
 
 const { postRegister, getUsers, getUserById, updateUser, searchUser, deleteUser, postLogin } = require("../controllers/users.controller")
@@ -25,7 +25,7 @@ const {
 
 /**
  * @swagger
- * /users/register:
+ * /user/register:
  *   post:
  *     summary: Yangi foydalanuvchini ro'yxatdan o'tkazish
  *     tags: [Users]
@@ -82,11 +82,10 @@ const {
 users.post("/register", validationSchema(registerValidationSchema), postRegister);
 
 
-users.post("/login", postLogin);
 
 /** 
  * @swagger
- * /users/getUsers:
+ * /user/getUsers:
  *   get:
  *     summary: barcha foydalanuvchilarni olish
  *     tags: [Users]
@@ -96,12 +95,116 @@ users.post("/login", postLogin);
  *         description: Foydalanuvchilar ro'yxati muvaffaqiyatli qaytarildi
  *       '500':
  *         description: Ichki server xatosi
- */
+*/
 users.get("/getUsers", getUsers)
+
+/** 
+ * @swagger
+ * /user/getUserById/{id}:
+ *   get:
+ *     summary: foydalanuvchi ID bo'yicha olish
+ *     tags: [Users]
+ *     parameters:
+ *       - in: path 
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: string
+ *     responses:
+ *       200:
+ *         description: Foydalanuvchi muvaffaqiyatli qaytarildi
+ *       404:
+ *         description: Foydalanuvchi topilmadi
+ *       500:
+ *         description: Server xatosi
+*/
 users.get("/getUserById/:id", getUserById)
+
+/** 
+ * @swagger
+ * /user/searchUser:
+ *  get:
+ *    summary: Foydalanuvchilarni qidirish
+ *    tags: [Users]
+ *    parameters: 
+ *      - in: query
+ *        name: query
+ *        required: true
+ *        schema: 
+ *          type: string
+ *    responses: 
+ *      200:
+ *        description: Qidiruv natijalari qaytarildi
+ *      404:
+ *        description: Foydalanuvhci topilmadi
+ *      500: 
+ *        description: Server xatosi
+ */
 users.get("/searchUser", searchUser)
+
+/** 
+ * @swagger
+ * /user/updateUser/{id}:
+ *   put:
+ *     summary: Foydalanuvchini yangilash
+ *     tags: [Users]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema: 
+ *           type: string
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               username:
+ *                 type: string
+ *               firstname:
+ *                 type: string
+ *               lastname: 
+ *                 type: string
+ *               address:
+ *                 type: string
+ *               phone:
+ *                 type: string 
+ *               product_id:
+ *                 type: string
+ *     responses:
+ *       200:
+ *         description: Foydalanuvchi muvaffaqiyatli yangilandi
+ *       404: 
+ *         description: Foydalanuvchi topilmadi
+ *       500: 
+ *         description: Server xatosi
+ */
 users.put("/updateUser/:id", validationSchema(updateUserValidationSchema), updateUser)
+
+/** 
+ * @swagger
+ * /user/deleteUser/{id}:
+ *   delete:
+ *     summary: Foydalanuvchini o'chirish
+ *     tags: [Users]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: string
+ *     responses:
+ *       200:
+ *         description: Foydalanuvchi muvaffaaqiyatli o'chirildi
+ *       404:  
+ *         description: Foydalanuvchi topilmadi
+ *       500:
+ *         description: Server xatosi
+ */
 users.delete("/deleteUser/:id", deleteUser)
+users.post("/login", postLogin);
 
 
-module.exports = {users};
+module.exports = { users };
