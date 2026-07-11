@@ -204,7 +204,36 @@ users.put("/updateUser/:id", validationSchema(updateUserValidationSchema), updat
  *         description: Server xatosi
  */
 users.delete("/deleteUser/:id", deleteUser)
+
+/** 
+ * @swagger
+ * /user/login:
+ *    post:
+ *     summary: Foydalanuvchini tizimga kirishi
+ *     tags: [Users]
+ *     description: Foydalanuvchini kiritilgan ma'lumotlar bilan tizimga kiritish
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               username:
+ *                 type: string
+ *                 description: Foydalanuvchining elektron pochta manzili
+ *               password:
+ *                 type: string
+ *                 description: Foydalanuvchining paroli
+ *     responses:
+ *       '200':
+ *         description: Foydalanuvchi muvaffaqiyatli tizimga kirdi
+ *       '401':
+ *         description: Noto'g'ri ma'lumotlar
+ *       '500':
+ *         description: Ichki server xatosi
+ */
 users.post("/login", postLogin);
 
 
-module.exports = { users };
+module.exports = { users }; 
