@@ -142,7 +142,7 @@ eduRoute.get("/searchEdu", searchEdu);
  *         required: true
  *         schema:
  *           type: string
- *     requestBosy:
+ *     requestBody:
  *       required: true
  *       content:
  *         application/json:
