@@ -32,7 +32,7 @@ const {
  *   post:
  *     summary: Yangi mashinani ro'yxatdan o'tkazish
  *     tags: [Car]
- *     description: Yangi mashina malumotlarini yaratish
+ *     description: Yangi mashina ma'lumotlarini yaratish
  *     requestBody:
  *       required: true
  *       content:
@@ -81,17 +81,158 @@ const {
  *                 description: Mashina sig'imi
  *     responses:
  *       '201':
- *         description: Mashina muvaffaqiyatli topilmadi
+ *         description: Mashina muvaffaqiyatli topildi
  *       '400':
  *         description: Yomon so'rov, validatsiya xatosi
  *       '500':
  *         description: Ichki server xatosi
  */
 carRoute.post("/add", validationSchema(carValidationSchema), postCar);
+
+
+
+/** 
+ * @swagger
+ * /car/all:
+ *   get:
+ *     summary: Barcha mashinalarni olish
+ *     tags: [Car]
+ *     description: Barcha mashinalar ro'yxatini olish
+ *     responses:
+ *       '200':
+ *         description: Mashinalar ro'yxati muvaffaqiyatli qaytarildi
+ *       '500':
+ *         description: Ichki server xatosi
+ */
 carRoute.get("/all", getCars);
+
+
+
+/** 
+ * @swagger
+ * /car/getCar/{id}:
+ *   get:
+ *     summary: Mashina ID bo'yicha olish
+ *     tags: [Car]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: string
+ *     responses:
+ *       200: 
+ *         description: Mashina muvaffaqiyatli qaytarildi
+ *       404:
+ *         description: Mashina topilmadi
+ *       500:
+ *         description: Server xatosi
+ */
 carRoute.get("/getCar/:id", getCarById);
-carRoute.put("/updateCar/:id", validationSchema(updateCarValidationSchema), updateCar);
+
+
+
+/** 
+ * @swagger
+ * /car/searchCar:
+ *   get:
+ *     summary: Mashinani qidirish
+ *     tags: [Car]
+ *     parameters:
+ *       - in: query
+ *         name: query
+ *         required: true
+ *         schema:  
+ *           type: string
+ *     responses:
+ *       200: 
+ *         description: Qidiruv natijalari qaytarildi
+ *       404:
+ *         description: Mashina topilmadi
+ *       500:
+ *         description: Server xatosi
+ */
 carRoute.get("/searchCar", searchCar);
+
+
+
+/** 
+ * @swagger
+ * /car/updateCar/{id}:
+ *   put:
+ *     summary: Mashina ma'lumotlarini yangilash
+ *     tags: [Car]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema: 
+ *           type: string
+ *     requestBody: 
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               title: 
+ *                 type: string
+ *               model:
+ *                 type: string
+ *               description:
+ *                 type: string
+ *               color:
+ *                 type: string
+ *               horsePower:
+ *                 type: string
+ *               carType:
+ *                 type: string
+ *               charging:
+ *                 type: string
+ *               weight:
+ *                 type: number 
+ *               gasoline:
+ *                 type: string
+ *               yearMachine:
+ *                 type: string
+ *               price: 
+ *                 type: string
+ *               plate_number:
+ *                 type: string
+ *               passenger_capacity:
+ *                 type: string
+ *     responses:
+ *       200:
+ *         description: Mashina muvaffaqiyatli yangilandi
+ *       404:
+ *         description: Mashina topilmadi
+ *       500:
+ *         description: Server xatosi
+ */
+carRoute.put("/updateCar/:id", validationSchema(updateCarValidationSchema), updateCar);
+
+
+
+/** 
+ * @swagger
+ * /car/deleteCar/{id}:
+ *   delete:
+ *     summary: Mashinani o'chirish
+ *     tags: [Car]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: string
+ *     responses:
+ *       200:
+ *         description: Mashina ma'lumotlari muvaffaqiyatli o'chirildi
+ *       404:
+ *         description: Mashina topilmadi
+ *       500:
+ *         description: Server xatosi
+ */
 carRoute.delete("/deleteCar/:id", deleteCar);
 
 
