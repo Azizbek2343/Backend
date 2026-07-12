@@ -160,7 +160,7 @@ houseRoute.get("/searchHouse", searchHouse);
  *               street:
  *                 type: string
  *               family_members:
- *                 type: number
+ *                 type: string
  *               location:
  *                 type: string
  *     responses:  

@@ -91,7 +91,7 @@ eduRoute.get("/all", getEdus);
  *     parameters: 
  *       - in: path
  *         name: id
- *         requiered: true
+ *         required: true
  *         schema:
  *           type: string
  *     responses:

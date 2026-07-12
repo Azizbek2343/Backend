@@ -81,7 +81,7 @@ const {
  *                 description: Mashina sig'imi
  *     responses:
  *       '201':
- *         description: Mashina muvaffaqiyatli topildi
+ *         description: Mashina muvaffaqiyatli yaratildi
  *       '400':
  *         description: Yomon so'rov, validatsiya xatosi
  *       '500':
