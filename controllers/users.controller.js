@@ -57,7 +57,7 @@ const postRegister = async (req , res ) => {
             message: "Server xatosi: Ro'yxatdan o'tish jarayonida xato yuz berdi.",
         });
     }
-}
+};
 
 // --------------------Get Users---------------------
 const getUsers = async (req, res) => {
@@ -75,7 +75,7 @@ const getUsers = async (req, res) => {
       message: "Server xatosi: Foydalanuvchilarni olishda xato yuz berdi.",
     });
   }
-}
+};
 
 //--------------------- getUserById ----------
 
@@ -92,7 +92,7 @@ const getUserById = async (req, res) => {
         console.error(err);
         res.status(500).json({message: "Internal Server Eror"})
     }
-}
+};
 
 // -------------------------Update users--------------------
 const updateUser = async (req,res) => {
@@ -102,7 +102,7 @@ const updateUser = async (req,res) => {
 
         const updateUser = await User.findByIdAndUpdate(
             id,
-            {username, lastname, phone,address,password,gender, birthday},
+            {username, lastname, phone, address, password, gender, birthday},
             {new: true}
         )
         if (!updateUser) {
@@ -123,8 +123,7 @@ const updateUser = async (req,res) => {
             error: error.message,
         })
     }
-}
-
+};
 
 // --------------------search user---------------------
 const searchUser = async (req, res) => {
@@ -157,7 +156,6 @@ const searchUser = async (req, res) => {
         res.status(500).json({ message: "Server error: Failed to fetch users." });
     }
 };
-
 
 // --------------------delete user---------------------
 const deleteUser = async (req, res) => {

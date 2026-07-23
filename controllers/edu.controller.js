@@ -60,7 +60,7 @@ const getEduById = async (req,res) => {
         console.error(err);
         res.status(500).json({message: "serverda xatolik yuz berdi"})
     }
-}
+};
 
 // ----------------------update edu --------------------------
 const updateEdu = async (req,res)=> {
@@ -89,9 +89,9 @@ const updateEdu = async (req,res)=> {
             success: false,
             message: "serverfa xatolik yuz berdi",
             error: err.message
-        })
+        });
     }
-}
+};
 
 // ---------------------- search edu ------------------------
 const searchEdu = async (req,res) => {
@@ -121,7 +121,7 @@ const searchEdu = async (req,res) => {
         console.error("O'quvmarkazlarni qidirishda xatolik", err);
         res.status(500).json({message: "Serverda xatolik: o'quvmarkazlarni qidirish muvaffaqiyatsiz!"})
     }
-} 
+};
 
 // ----------------------- delete edu ---------------------------------------
 const deleteEdu = async (req,res) => {
@@ -142,7 +142,7 @@ const deleteEdu = async (req,res) => {
     }catch(err){
         return res.status(500).json({success: false, message: err.message})
     }
-}
+};
 
 module.exports = { 
     postEdu, 

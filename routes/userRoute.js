@@ -78,7 +78,6 @@ const {
  *       '500':
  *         description: Ichki server xatosi
  */
-
 users.post("/register", validationSchema(registerValidationSchema), postRegister);
 
 
